@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/share"
+        android:title="@string/share_article"
+        android:orderInCategory="50"
+        android:icon="@drawable/ic_baseline_share_24"
+        app:showAsAction="ifRoom">
+
+    </item>
+
+
+    <item
+        android:id="@+id/save"
+        android:title="@string/save_article"
+        android:orderInCategory="80"
+        android:icon="@drawable/ic_outline_star_outline_24"
+        app:showAsAction="ifRoom"/>
+
+
+</menu>

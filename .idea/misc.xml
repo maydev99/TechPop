@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="app/src/main/res/drawable/background_gradient.xml" value="0.4305555555555556" />
+        <entry key="app/src/main/res/drawable/gradient_fade_up.xml" value="0.4166666666666667" />
+        <entry key="app/src/main/res/drawable/ic_baseline_public_24.xml" value="0.3037037037037037" />
+        <entry key="app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.4074074074074074" />
+        <entry key="app/src/main/res/drawable/ic_outline_account_circle_24.xml" value="0.3037037037037037" />
+        <entry key="app/src/main/res/drawable/ic_outline_home_24.xml" value="0.3037037037037037" />
+        <entry key="app/src/main/res/drawable/ic_outline_person_outline_24.xml" value="0.3037037037037037" />
+        <entry key="app/src/main/res/drawable/ic_outline_settings_24.xml" value="0.412962962962963" />
+        <entry key="app/src/main/res/drawable/ic_outline_star_outline_24.xml" value="0.4305555555555556" />
+        <entry key="app/src/main/res/drawable/placeholder_image.xml" value="0.412962962962963" />
+        <entry key="app/src/main/res/drawable/round_button_corners.xml" value="0.4305555555555556" />
+        <entry key="app/src/main/res/drawable/round_cornerd_red_buton.xml" value="0.3037037037037037" />
+        <entry key="app/src/main/res/drawable/top_rounded_corners.xml" value="0.412962962962963" />
+        <entry key="app/src/main/res/layout-land/activity_article_detail.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout-land/fragment_account.xml" value="0.3536458333333333" />
+        <entry key="app/src/main/res/layout-large-land/activity_article_detail.xml" value="0.4466666666666667" />
+        <entry key="app/src/main/res/layout-large-port/activity_article_detail.xml" value="0.6796875" />
+        <entry key="app/src/main/res/layout-large/activity_article_detail.xml" value="0.4466666666666667" />
+        <entry key="app/src/main/res/layout-large/fragment_account.xml" value="0.47152777777777777" />
+        <entry key="app/src/main/res/layout-xlarge-port/activity_article_detail.xml" value="0.16666666666666666" />
+        <entry key="app/src/main/res/layout-xlarge/activity_article_detail.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout-xlarge/fragment_account.xml" value="0.247234873129473" />
+        <entry key="app/src/main/res/layout/about_custom_layout.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/about_dialog_layout.xml" value="0.16666666666666666" />
+        <entry key="app/src/main/res/layout/account_dialog_layout.xml" value="0.31203703703703706" />
+        <entry key="app/src/main/res/layout/activity_article_detail.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_authentication.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/article_card.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_account.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_home.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/layout/fragment_logger.xml" value="0.4671875" />
+        <entry key="app/src/main/res/layout/fragment_saved.xml" value="0.22" />
+        <entry key="app/src/main/res/layout/saved_article_item.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/menu/detail_menu.xml" value="0.31203703703703706" />
+        <entry key="app/src/main/res/menu/home_menu.xml" value="0.337037037037037" />
+        <entry key="app/src/main/res/menu/main_menu.xml" value="0.4546296296296296" />
+        <entry key="app/src/main/res/menu/nav_menu.xml" value="0.3333333333333333" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.4074074074074074" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.4074074074074074" />
+        <entry key="app/src/main/res/xml/root_preferences.xml" value="0.7018518518518518" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.247234873129473" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

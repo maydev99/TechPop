@@ -1,0 +1,45 @@
+<resources>
+    <string name="app_name">TechPop</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <!-- Preference Titles -->
+    <string name="messages_header">Messages</string>
+    <string name="sync_header">Sync</string>
+
+    <!-- Messages Preferences -->
+    <string name="signature_title">Your signature</string>
+    <string name="reply_title">Default reply action</string>
+
+    <!-- Sync Preferences -->
+    <string name="sync_title">Sync email periodically</string>
+    <string name="attachment_title">Download incoming attachments</string>
+    <string name="attachment_summary_on">Automatically download attachments for incoming emails
+    </string>
+    <string name="attachment_summary_off">Only download attachments when manually requested</string>
+    <string name="home">Home</string>
+    <string name="account">Account</string>
+    <string name="settings">Settings</string>
+    <string name="sign_out">Sign Out</string>
+    <string name="author_link">Author/ Link:</string>
+    <string name="by">\"by: \"</string>
+    <string name="about">About</string>
+    <string name="signed_in_as">Signed in as:</string>
+    <string name="share_article">Share Article</string>
+    <string name="save_article">Save Article</string>
+    <string name="share_greeting">from TechPop\n\n</string>
+    <string name="share_action1">\nLink</string>
+    <string name="saved">Saved</string>
+    <string name="you_have_no_saved_articles">You Have No Saved Articles</string>
+    <string name="logger">Logger</string>
+    <string name="techpop">TechPop</string>
+    <string name="view_full_article_in_web_browser">View full article in web browser</string>
+    <string name="image_for_article">Image for article</string>
+    <string name="build_date">Build Date:</string>
+    <string name="by_michael_may">by Michael May</string>
+    <string name="bombadu_apps">Bombadu Apps</string>
+    <string name="tech_pop_icon">Tech Pop Icon</string>
+    <string name="powered_by_newsapi_org">Powered by NewsApi.org</string>
+    <string name="delete_old">Delete Old</string>
+
+
+</resources>
