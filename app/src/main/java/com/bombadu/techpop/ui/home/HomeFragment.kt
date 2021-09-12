@@ -52,6 +52,9 @@ class HomeFragment : Fragment() {
 
     private fun observeNewsArticles() {
         viewModel.newsArticles.observe(viewLifecycleOwner, { news ->
+            if(news.isNullOrEmpty()) {
+                viewModel.getNewsFromFirebase()
+            }
             homeAdapter.submitList(news)
             recyclerView.scrollToPosition(0)
 

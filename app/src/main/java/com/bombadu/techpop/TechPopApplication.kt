@@ -1,25 +1,24 @@
 package com.bombadu.techpop
 
 import android.app.Application
-import android.os.Build
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.*
-import com.bombadu.techpop.util.Worker.Companion.WORK_NAME
+import com.bombadu.techpop.util.DeleteWorker
+import com.bombadu.techpop.util.DeleteWorker.Companion.WORK_NAME
 import dagger.hilt.android.HiltAndroidApp
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 @HiltAndroidApp
-class TechPopApplication: Application() {
+class TechPopApplication: Application(), Configuration.Provider {
 
-    private val applicationScope = CoroutineScope(Dispatchers.Default)
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
+
 
     override fun onCreate() {
         super.onCreate()
-        applicationScope.launch {
-         // setupRecurringWork()
-        }
+        setupRecurringWork()
     }
 
     private fun setupRecurringWork() {
@@ -27,14 +26,22 @@ class TechPopApplication: Application() {
             .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
-        val repeatRequest = PeriodicWorkRequestBuilder<Worker>(8, TimeUnit.HOURS)
+        val repeatRequest = PeriodicWorkRequestBuilder<DeleteWorker>(1, TimeUnit.DAYS)
             .setConstraints(constraints)
+            .setInitialDelay(10, TimeUnit.SECONDS)
             .build()
 
-        WorkManager.getInstance().enqueueUniquePeriodicWork(
+        WorkManager.getInstance(applicationContext).enqueueUniquePeriodicWork(
             WORK_NAME,
-            ExistingPeriodicWorkPolicy.KEEP,
+            ExistingPeriodicWorkPolicy.REPLACE,
             repeatRequest
         )
     }
+
+    override fun getWorkManagerConfiguration() =
+        Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
+
+
 }

@@ -171,6 +171,11 @@ class DefaultMainRepository @Inject constructor(
                 for (i in deleteList.indices) {
                     articlesRef.child(deleteList[i]).removeValue()
                 }
+
+                ioScope.launch {
+                    deleteOldLocalData()
+                }
+
             }
 
             override fun onCancelled(error: DatabaseError) {
@@ -261,6 +266,10 @@ class DefaultMainRepository @Inject constructor(
 
                     }
 
+                }
+
+                ioScope.launch {
+                    deleteOldFirebaseData()
                 }
 
             }

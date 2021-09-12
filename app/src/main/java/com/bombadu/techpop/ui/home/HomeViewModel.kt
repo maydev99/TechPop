@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(
     fun deleteOldData(){
         viewModelScope.launch {
             repository.deleteOldFirebaseData()
-            repository.deleteOldLocalData()
+           // repository.deleteOldLocalData()
         }
     }
 
