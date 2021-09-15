@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bombadu.techpop.R
 import com.bombadu.techpop.databinding.ActivityAuthenticationBinding
 import com.bombadu.techpop.ui.MainActivity
+import com.bombadu.techpop.ui.update.UpdateActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
 import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
@@ -58,7 +59,7 @@ class AuthenticationActivity : AppCompatActivity() {
         //val response = result.idpResponse
 
         if (result.resultCode == RESULT_OK) {
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, UpdateActivity::class.java))
             finish()
             // ...
         } else {
@@ -76,7 +77,7 @@ class AuthenticationActivity : AppCompatActivity() {
         val currentUser = auth.currentUser
         if (currentUser != null) {
             binding.signInButton.visibility = View.INVISIBLE
-            startActivity(Intent(this, MainActivity::class.java))
+            startActivity(Intent(this, UpdateActivity::class.java))
             finish()
         } else {
             binding.signInButton.visibility = View.VISIBLE

@@ -47,8 +47,7 @@
             android:paddingEnd="32dp"
             android:text="@string/build_date"
             android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textSize="22sp" />
 
 
         <TextView
@@ -60,8 +59,7 @@
             android:paddingEnd="32dp"
             android:text="@string/by_michael_may"
             android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textSize="22sp" />
 
         <TextView
             android:id="@+id/textView8"
@@ -72,8 +70,7 @@
             android:paddingEnd="32dp"
             android:text="@string/bombadu_apps"
             android:textColor="@color/black"
-            android:textSize="22sp"
-            android:textStyle="bold" />
+            android:textSize="22sp" />
 
 
     </androidx.appcompat.widget.LinearLayoutCompat>

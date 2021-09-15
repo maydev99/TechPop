@@ -3,27 +3,31 @@ package com.bombadu.techpop.ui.detail
 import android.content.Context
 import android.content.Intent
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.os.VibrationEffect
 import android.os.Vibrator
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
-import android.view.animation.AnimationUtils
 import android.widget.Toast
-import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
-import androidx.core.view.MenuItemCompat
 import com.bombadu.techpop.R
 import com.bombadu.techpop.databinding.ActivityArticleDetailBinding
 import com.bombadu.techpop.local.NewsEntity
+import com.bombadu.techpop.local.SavedDao
 import com.bombadu.techpop.local.SavedEntity
 import com.bombadu.techpop.util.Utils
 import com.squareup.picasso.Picasso
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import java.net.MalformedURLException
 import java.net.URISyntaxException
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class ArticleDetailActivity : AppCompatActivity() {
@@ -32,8 +36,13 @@ class ArticleDetailActivity : AppCompatActivity() {
     private lateinit var url: String
     private lateinit var title: String
     private lateinit var imageUrl: String
-    private val viewModel: DetailViewModel by viewModels()
+    private var isFavorite = false
     private var mMenu: Menu? = null
+    private lateinit var savedItem: SavedEntity
+    val ioScope by lazy { CoroutineScope(Dispatchers.IO) }
+
+    @Inject
+    lateinit var savedDao: SavedDao
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,6 +59,14 @@ class ArticleDetailActivity : AppCompatActivity() {
         val author = articleItem.author
         val description = articleItem.description
         val source = articleItem.source
+
+        ioScope.launch {
+            isFavorite = savedDao.checkIfIsSaved(title)
+        }
+
+
+        savedItem = SavedEntity(articleItem.timeStamp, url, imageUrl, title)
+
 
 
 
@@ -80,7 +97,7 @@ class ArticleDetailActivity : AppCompatActivity() {
         }
 
         binding.detailFab.setOnClickListener {
-            val intent= Intent(Intent.ACTION_VIEW)
+            val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
         }
@@ -89,28 +106,55 @@ class ArticleDetailActivity : AppCompatActivity() {
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.detail_menu, menu)
         mMenu = menu
+
+        if (isFavorite) {
+            mMenu?.findItem(R.id.save)?.icon =
+                ContextCompat.getDrawable(this, R.drawable.ic_baseline_star_24)
+
+        } else {
+            mMenu?.findItem(R.id.save)?.icon =
+                ContextCompat.getDrawable(this, R.drawable.ic_outline_star_outline_24)
+
+        }
         return super.onCreateOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        when(item.itemId) {
+        when (item.itemId) {
             R.id.share -> {
                 shareArticle()
 
             }
-            
+
             R.id.save -> {
-                val starAnimation = AnimationUtils.loadAnimation(this, R.anim.star_animation)
-                //val star = mMenu?.findItem(R.id.save)?.icon
                 val vib: Vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
                 vib.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
-                val newInsert = SavedEntity(Utils.getTimeStamp(), url, imageUrl, title)
-                viewModel.insertSavedArticle(newInsert)
+                if (isFavorite) {
+                    mMenu?.findItem(R.id.save)?.icon =
+                        ContextCompat.getDrawable(this, R.drawable.ic_outline_star_outline_24)
+                    isFavorite = false
+                    ioScope.launch {
+                        savedDao.deleteSavedArticleByTitle(title)
+                    }
+
+
+                } else {
+                    mMenu?.findItem(R.id.save)?.icon =
+                        ContextCompat.getDrawable(this, R.drawable.ic_baseline_star_24)
+                    isFavorite = true
+                    ioScope.launch {
+                        savedDao.insertSavedData(savedItem)
+                    }
+
+
+                }
+
+
                 Toast.makeText(this, "Article Saved", Toast.LENGTH_SHORT).show()
             }
         }
-        
-        
+
+
         return super.onOptionsItemSelected(item)
     }
 
@@ -136,7 +180,7 @@ class ArticleDetailActivity : AppCompatActivity() {
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
             startActivity(Intent.createChooser(intent, "send"))
 
-        }catch (e: MalformedURLException) {
+        } catch (e: MalformedURLException) {
             e.printStackTrace()
         } catch (e1: URISyntaxException) {
             e1.printStackTrace()

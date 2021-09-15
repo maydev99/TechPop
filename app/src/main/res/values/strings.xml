@@ -40,6 +40,7 @@
     <string name="tech_pop_icon">Tech Pop Icon</string>
     <string name="powered_by_newsapi_org">Powered by NewsApi.org</string>
     <string name="delete_old">Delete Old</string>
+    <string name="updating_news">Updating News</string>
 
 
 </resources>

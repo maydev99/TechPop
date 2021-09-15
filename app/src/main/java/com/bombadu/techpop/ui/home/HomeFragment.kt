@@ -71,12 +71,9 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.about -> {
-                Utils.showAboutDialog(requireContext(),"v2.0","9.6.2021")
+                Utils.showAboutDialog(requireContext(),"v2.0","9.15.2021")
             }
 
-            R.id.delete_old -> {
-                viewModel.deleteOldData()
-            }
         }
 
         return super.onOptionsItemSelected(item)

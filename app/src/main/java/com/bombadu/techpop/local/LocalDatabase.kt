@@ -35,9 +35,14 @@ interface SavedDao {
     @Delete
     fun deleteSavedArticle(savedEntity: SavedEntity)
 
-
     @Query("SELECT * FROM saved_data_table ORDER BY savedTimeStamp DESC")
     fun getAllSavedArticles(): LiveData<List<SavedEntity>>
+
+    @Query("SELECT EXISTS(SELECT * FROM saved_data_table WHERE title = :title)")
+    fun checkIfIsSaved(title: String) : Boolean
+
+    @Query("DELETE FROM saved_data_table WHERE title = :title")
+    fun deleteSavedArticleByTitle(title: String)
 
 }
 

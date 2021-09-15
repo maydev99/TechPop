@@ -1,6 +1,5 @@
 package com.bombadu.techpop.ui.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -14,27 +13,25 @@ import javax.inject.Inject
 @HiltViewModel
 class HomeViewModel @Inject constructor(
     private val repository: MainRepository,
-
     ) : ViewModel() {
-
 
     val newsArticles: LiveData<List<NewsEntity>> = repository.observeAllNewsData()
 
-
     init {
-        checkApiUpdate()
+        deleteOldData()
     }
 
     fun deleteOldData(){
         viewModelScope.launch {
-            repository.deleteOldFirebaseData()
-           // repository.deleteOldLocalData()
+            repository.deleteOldLocalData()
+            delay(1000)
+            getNewsFromFirebase()
         }
     }
 
 
     //Checks if update is needed
-    private fun checkApiUpdate() {
+    /*private fun checkApiUpdate() {
         viewModelScope.launch {
             try {
 
@@ -44,7 +41,7 @@ class HomeViewModel @Inject constructor(
             }
 
         }
-    }
+    }*/
 
     fun getNewsFromFirebase() {
         viewModelScope.launch {
