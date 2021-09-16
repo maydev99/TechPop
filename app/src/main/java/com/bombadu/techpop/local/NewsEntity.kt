@@ -3,11 +3,12 @@ package com.bombadu.techpop.local
 import android.os.Parcelable
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 
-@Entity(tableName = "news_data_table")
+@Entity(tableName = "news_data_table", indices = [Index(value = ["title", "description"], unique = true)])
 @Parcelize
 data class NewsEntity(
     @ColumnInfo(name = "author") var author: String?,

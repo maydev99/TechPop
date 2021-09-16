@@ -35,7 +35,6 @@ class UpdateActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityUpdateBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
         checkUpdate()
 
 

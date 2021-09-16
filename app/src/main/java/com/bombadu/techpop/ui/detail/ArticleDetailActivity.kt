@@ -39,7 +39,7 @@ class ArticleDetailActivity : AppCompatActivity() {
     private var isFavorite = false
     private var mMenu: Menu? = null
     private lateinit var savedItem: SavedEntity
-    val ioScope by lazy { CoroutineScope(Dispatchers.IO) }
+    private val ioScope by lazy { CoroutineScope(Dispatchers.IO) }
 
     @Inject
     lateinit var savedDao: SavedDao
@@ -50,6 +50,9 @@ class ArticleDetailActivity : AppCompatActivity() {
         binding = ActivityArticleDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+       /* var actionBar = supportActionBar
+        actionBar!!.setDisplayHomeAsUpEnabled(true)
+        actionBar*/
         val articleItem = intent.getParcelableExtra<NewsEntity>("article_key")
 
         imageUrl = articleItem!!.urlToImage.toString()
@@ -124,6 +127,11 @@ class ArticleDetailActivity : AppCompatActivity() {
             R.id.share -> {
                 shareArticle()
 
+            }
+
+            android.R.id.home -> {
+                onBackPressed()
+                return true
             }
 
             R.id.save -> {

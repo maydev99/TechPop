@@ -6,6 +6,7 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bombadu.techpop.R
 import com.bombadu.techpop.util.Utils
@@ -18,6 +19,7 @@ class HomeFragment : Fragment() {
     private lateinit var homeAdapter: HomeAdapter
     private lateinit var recyclerView: RecyclerView
     private var isLandscape = false
+    private var lastPosition: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -52,6 +54,7 @@ class HomeFragment : Fragment() {
 
     private fun observeNewsArticles() {
         viewModel.newsArticles.observe(viewLifecycleOwner, { news ->
+            lastPosition = news.size - 1
             if(news.isNullOrEmpty()) {
                 viewModel.getNewsFromFirebase()
             }
@@ -72,6 +75,14 @@ class HomeFragment : Fragment() {
         when(item.itemId) {
             R.id.about -> {
                 Utils.showAboutDialog(requireContext(),"v2.0","9.15.2021")
+            }
+
+            R.id.scroll_to_top -> {
+                recyclerView.smoothScrollToPosition(0)
+            }
+
+            R.id.scroll_to_bottom -> {
+                recyclerView.smoothScrollToPosition(lastPosition)
             }
 
         }

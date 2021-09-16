@@ -41,6 +41,8 @@
     <string name="powered_by_newsapi_org">Powered by NewsApi.org</string>
     <string name="delete_old">Delete Old</string>
     <string name="updating_news">Updating News</string>
+    <string name="scroll_to_top">Scroll To Top</string>
+    <string name="scroll_to_bottom">Scroll To Bottom</string>
 
 
 </resources>

@@ -15,7 +15,7 @@
         android:layout_marginTop="32dp"
         android:elevation="4dp"
         android:padding="4dp"
-        android:src="@drawable/texhpopicon"
+        android:src="@drawable/techpopiconstore"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

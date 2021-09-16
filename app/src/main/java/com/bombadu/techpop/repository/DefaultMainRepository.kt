@@ -8,7 +8,6 @@ import com.bombadu.techpop.local.SavedDao
 import com.bombadu.techpop.local.SavedEntity
 import com.bombadu.techpop.network.NewsApi
 import com.bombadu.techpop.util.Constants.ARTICLE_LIFE_SPAN_IN_DAYS
-import com.bombadu.techpop.util.NetworkUtil
 import com.bombadu.techpop.util.Utils
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -46,8 +45,6 @@ class DefaultMainRepository @Inject constructor(
 
     override suspend fun getNewsFromFirebase() {
 
-        val updateLocalList = mutableListOf<NewsEntity>()
-
         Log.i(
             TAG,
             "GETTING NEWS FROM FIREBASE ${Utils.convertTimestampToDate(Utils.getTimeStamp())}"
@@ -76,44 +73,21 @@ class DefaultMainRepository @Inject constructor(
                         source, title, url, urlToImage, timeStamp
                     )
 
-                    updateLocalList.add(newInsert)
+                    ioScope.launch {
+                        localDao.insertNewData(newInsert)
+                    }
+
+
 
                     myCount++
                 }
 
                 Log.i(TAG, "FB COUNT: $myCount")
                 myCount = 0
-
-                val duplicatesRemoved: List<NewsEntity> = updateLocalList.toSet().toList()
-                for (i in duplicatesRemoved.indices) {
-                    val author = duplicatesRemoved[i].author
-                    val content = duplicatesRemoved[i].content
-                    val description = duplicatesRemoved[i].description
-                    val publishedAt = duplicatesRemoved[i].publishedAt
-                    val source = duplicatesRemoved[i].source
-                    val title = duplicatesRemoved[i].title
-                    val url = duplicatesRemoved[i].url
-                    val urlToImage = duplicatesRemoved[i].urlToImage
-                    val timestamp = duplicatesRemoved[i].timeStamp
-
-                    val localDBInsert = NewsEntity(
-                        author,
-                        content,
-                        description,
-                        publishedAt,
-                        source,
-                        title,
-                        url,
-                        urlToImage,
-                        timestamp
-                    )
-
-                    ioScope.launch {
-                        if (!localDao.doesTitleExist(title!!)) {
-                            localDao.insertNewData(localDBInsert)
-                        }
-                    }
+                ioScope.launch {
+                    deleteOldLocalData()
                 }
+
             }
 
             override fun onCancelled(error: DatabaseError) {

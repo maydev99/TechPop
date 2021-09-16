@@ -46,7 +46,7 @@ class AuthenticationActivity : AppCompatActivity() {
         val signInIntent = AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
-            .setLogo(R.drawable.texhpopicon)
+            .setLogo(R.drawable.techpopiconstore)
             .setTheme(R.style.Theme_TechPop_Auth)
             .build()
         signInLauncher.launch(signInIntent)
