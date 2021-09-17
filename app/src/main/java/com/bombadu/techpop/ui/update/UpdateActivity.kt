@@ -10,6 +10,7 @@ import com.bombadu.techpop.network.NewsApi
 import com.bombadu.techpop.repository.DefaultMainRepository
 import com.bombadu.techpop.repository.MainRepository
 import com.bombadu.techpop.ui.MainActivity
+import com.bombadu.techpop.util.Constants.ARTICLE_LIFE_SPAN_IN_DAYS
 import com.bombadu.techpop.util.NetworkUtil
 import com.bombadu.techpop.util.Utils
 import com.google.firebase.database.DataSnapshot
@@ -30,6 +31,7 @@ class UpdateActivity : AppCompatActivity() {
     lateinit var repository: MainRepository
     @Inject
     lateinit var newsApi: NewsApi
+    var articleLifeSpanDays = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -169,7 +171,7 @@ class UpdateActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 val currentTs = Utils.getTimeStamp().toLong()
-                val deleteTs = currentTs - Utils.convertDaysToTimestampTime(1)
+                val deleteTs = currentTs - Utils.convertDaysToTimestampTime(ARTICLE_LIFE_SPAN_IN_DAYS)
                 val deleteList = mutableListOf<String>()
 
                 for (item in snapshot.children) {
