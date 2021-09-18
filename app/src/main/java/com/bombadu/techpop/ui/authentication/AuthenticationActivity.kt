@@ -7,7 +7,6 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bombadu.techpop.R
 import com.bombadu.techpop.databinding.ActivityAuthenticationBinding
-import com.bombadu.techpop.ui.MainActivity
 import com.bombadu.techpop.ui.update.UpdateActivity
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract

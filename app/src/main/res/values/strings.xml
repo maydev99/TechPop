@@ -38,11 +38,12 @@
     <string name="by_michael_may">by Michael May</string>
     <string name="bombadu_apps">Bombadu Apps</string>
     <string name="tech_pop_icon">Tech Pop Icon</string>
-    <string name="powered_by_newsapi_org">Powered by NewsApi.org</string>
     <string name="delete_old">Delete Old</string>
     <string name="updating_news">Updating News</string>
     <string name="scroll_to_top">Scroll To Top</string>
     <string name="scroll_to_bottom">Scroll To Bottom</string>
+    <string name="sign_in_with_google">Sign In with Google</string>
+    <string name="google_account_image">Google Account Image</string>
 
 
 </resources>

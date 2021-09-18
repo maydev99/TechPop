@@ -6,7 +6,6 @@ import androidx.lifecycle.viewModelScope
 import com.bombadu.techpop.local.NewsEntity
 import com.bombadu.techpop.repository.MainRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,7 +20,7 @@ class HomeViewModel @Inject constructor(
         deleteOldData()
     }
 
-    fun deleteOldData(){
+    private fun deleteOldData(){
         viewModelScope.launch {
             //repository.deleteOldLocalData()
             getNewsFromFirebase()
@@ -29,26 +28,10 @@ class HomeViewModel @Inject constructor(
     }
 
 
-    //Checks if update is needed
-    /*private fun checkApiUpdate() {
-        viewModelScope.launch {
-            try {
-
-                repository.checkUpdate()
-            } catch (e: Exception) {
-                Log.e(TAG, "Update Check Failed")
-            }
-
-        }
-    }*/
-
     fun getNewsFromFirebase() {
         viewModelScope.launch {
             repository.getNewsFromFirebase()
         }
     }
 
-    companion object {
-        const val TAG = "HomeViewModel"
-    }
 }

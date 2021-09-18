@@ -31,7 +31,7 @@ class UpdateActivity : AppCompatActivity() {
     lateinit var repository: MainRepository
     @Inject
     lateinit var newsApi: NewsApi
-    var articleLifeSpanDays = 1
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
