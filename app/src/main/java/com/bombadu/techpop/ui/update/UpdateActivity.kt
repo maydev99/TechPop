@@ -66,8 +66,7 @@ class UpdateActivity : AppCompatActivity() {
 
                     }
                 } else {
-                    startActivity(Intent(this@UpdateActivity, MainActivity::class.java))
-                    finish()
+                    getNewsFromFirebase()
                 }
             }
 
@@ -187,8 +186,9 @@ class UpdateActivity : AppCompatActivity() {
                     articlesRef.child(deleteList[i]).removeValue()
                 }
 
-                startActivity(Intent(this@UpdateActivity, MainActivity::class.java))
-                finish()
+                getNewsFromFirebase()
+
+
 
             }
 
@@ -201,6 +201,74 @@ class UpdateActivity : AppCompatActivity() {
 
         articlesRef.addListenerForSingleValueEvent(deleteArticlesListener)
 
+
+    }
+
+    private fun getNewsFromFirebase() {
+
+        Log.i(
+            DefaultMainRepository.TAG,
+            "GETTING NEWS FROM FIREBASE ${Utils.convertTimestampToDate(Utils.getTimeStamp())}"
+        )
+        var myCount = 0
+
+        val articlesListener = object : ValueEventListener {
+            override fun onDataChange(snapshot: DataSnapshot) {
+
+
+                for (item in snapshot.children) {
+                    val key = item.key.toString()
+                    val author = snapshot.child(key).child("author").value.toString()
+                    val content = snapshot.child(key).child("content").value.toString()
+                    val description = snapshot.child(key).child("description").value.toString()
+                    val publishedAt = snapshot.child(key).child("published_at").value.toString()
+                    val source = snapshot.child(key).child("source").value.toString()
+                    val title = snapshot.child(key).child("title").value.toString()
+                    val url = snapshot.child(key).child("url").value.toString()
+                    val urlToImage = snapshot.child(key).child("url_to_image").value.toString()
+                    val timeStamp = snapshot.child(key).child("time_stamp").value.toString()
+
+
+                    val newInsert = NewsEntity(
+                        author, content, description, publishedAt,
+                        source, title, url, urlToImage, timeStamp
+                    )
+
+                    ioScope.launch {
+                        repository.insertNewsArticles(newInsert)
+                    }
+
+
+
+                    myCount++
+                }
+
+                Log.i(DefaultMainRepository.TAG, "FB COUNT: $myCount")
+                myCount = 0
+                ioScope.launch {
+                    deleteOldLocalData()
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                Log.e(DefaultMainRepository.TAG, "Database Error: $error")
+            }
+        }
+
+        articlesRef.addValueEventListener(articlesListener)
+
+    }
+
+    private fun deleteOldLocalData() {
+        Log.i(DefaultMainRepository.TAG, "Deleting Old Local Data")
+        val deleteTime = Utils.getTimeStamp().toLong() - Utils.convertDaysToTimestampTime(ARTICLE_LIFE_SPAN_IN_DAYS)
+        ioScope.launch {
+            repository.deleteOldArticlesFromLocalDB(deleteTime)
+
+        }
+
+        startActivity(Intent(this@UpdateActivity, MainActivity::class.java))
 
     }
 
