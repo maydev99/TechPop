@@ -2,6 +2,7 @@ package com.bombadu.techpop.ui.authentication
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -41,7 +42,7 @@ class AuthenticationActivity : AppCompatActivity() {
             AuthUI.IdpConfig.EmailBuilder().build(),
             AuthUI.IdpConfig.GoogleBuilder().build())
 
-        // Create and launch sign-in intent
+
         val signInIntent = AuthUI.getInstance()
             .createSignInIntentBuilder()
             .setAvailableProviders(providers)
@@ -49,7 +50,7 @@ class AuthenticationActivity : AppCompatActivity() {
             .setTheme(R.style.Theme_TechPop_Auth)
             .build()
         signInLauncher.launch(signInIntent)
-        // [END auth_fui_create_intent]
+
     }
 
 
@@ -63,6 +64,7 @@ class AuthenticationActivity : AppCompatActivity() {
             // ...
         } else {
             Toast.makeText(this, "Sign In Failed", Toast.LENGTH_SHORT).show()
+            Log.i("MAY", "Login Failed: ${result.idpResponse}")
 
         }
     }

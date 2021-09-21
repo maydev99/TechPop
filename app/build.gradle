@@ -14,8 +14,8 @@ android {
         applicationId "com.bombadu.techpop"
         minSdk 26
         targetSdk 30
-        versionCode 1
-        versionName "1.0"
+        versionCode 5
+        versionName "2.0"
         buildConfigField("String", "API_KEY", API_KEY)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -121,6 +121,21 @@ dependencies {
     // For instrumentation tests
     androidTestImplementation  'com.google.dagger:hilt-android-testing:2.37'
     kaptAndroidTest 'com.google.dagger:hilt-compiler:2.37'
+    androidTestImplementation "junit:junit:4.13.2"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.12.1"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'
+   // debugImplementation "androidx.fragment:fragment-testing:1.4.0-alpha09"
+    //androidTestImplementation("androidx.navigation:navigation-testing:2.3.5")
+
+    //androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+  /*  androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    androidTestImplementation "org.mockito:mockito-core:2.21.0"
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.37'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.30.1-alpha'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.4.0'*/
 
     // For local unit tests
     testImplementation 'com.google.dagger:hilt-android-testing:2.37'
@@ -128,6 +143,31 @@ dependencies {
 
     //Truth
     testImplementation "com.google.truth:truth:1.1.3"
+
+    //Testing Added
+
+    // AndroidX Test - Instrumented testing
+ /*   androidTestImplementation "androidx.test:core-ktx:1.4.0"
+    androidTestImplementation "androidx.test.ext:junit-ktx:1.1.3"
+    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
+    androidTestImplementation "androidx.test:rules:1.4.0"
+    androidTestImplementation "androidx.room:room-testing:2.3.0"
+    androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
+    androidTestImplementation "org.robolectric:annotations:1.0.0"
+    androidTestImplementation "androidx.test.espresso:espresso-core:3.4.0"
+    androidTestImplementation "androidx.test.espresso:espresso-contrib:3.4.0"
+    androidTestImplementation "androidx.test.espresso:espresso-intents:3.4.0"
+    androidTestImplementation "androidx.test.espresso.idling:idling-concurrent:3.4.0"
+    androidTestImplementation "junit:junit:4.13.2"
+    // Once https://issuetracker.google.com/127986458 is fixed this can be testImplementation
+    //implementation "androidx.fragment:fragment-testing:1.3.6"
+    implementation "androidx.test:core:1.4.0"
+    implementation "androidx.fragment:fragment-ktx:1.3.6"
+    androidTestImplementation "org.mockito:mockito-core:2.21.0"
+    androidTestImplementation "com.linkedin.dexmaker:dexmaker-mockito:2.12.1"
+    androidTestImplementation('org.koin:koin-test:2.0.1') { exclude group: 'org.mockito' }
+    androidTestImplementation 'androidx.test.uiautomator:uiautomator:2.2.0'*/
+
 
 }
 

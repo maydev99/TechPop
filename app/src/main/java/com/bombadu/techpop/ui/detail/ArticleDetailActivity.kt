@@ -73,8 +73,8 @@ class ArticleDetailActivity : AppCompatActivity() {
             Picasso.get().load(imageUrl)
                 .fit()
                 .centerCrop()
-                .placeholder(R.drawable.placeholder_image)
-                .error(R.drawable.missingimage).into(binding.detailImageView)
+                .placeholder(R.drawable.gradient_fade_up)
+                .error(R.drawable.noimage).into(binding.detailImageView)
 
         } else {
             Picasso.get().load(R.drawable.missingimage)
@@ -96,6 +96,7 @@ class ArticleDetailActivity : AppCompatActivity() {
         }
 
         binding.detailFab.setOnClickListener {
+            tapVib()
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
@@ -131,15 +132,16 @@ class ArticleDetailActivity : AppCompatActivity() {
             }
 
             R.id.save -> {
-                val vib: Vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
-                vib.vibrate(VibrationEffect.createOneShot(500, VibrationEffect.DEFAULT_AMPLITUDE))
+                tapVib()
                 if (isFavorite) {
                     mMenu?.findItem(R.id.save)?.icon =
                         ContextCompat.getDrawable(this, R.drawable.ic_outline_star_outline_24)
                     isFavorite = false
                     ioScope.launch {
                         savedDao.deleteSavedArticleByTitle(title)
+
                     }
+                    Utils.makeAToast(this@ArticleDetailActivity, "Un-Saved")
 
 
                 } else {
@@ -148,13 +150,13 @@ class ArticleDetailActivity : AppCompatActivity() {
                     isFavorite = true
                     ioScope.launch {
                         savedDao.insertSavedData(savedItem)
+
                     }
+                    Utils.makeAToast(this@ArticleDetailActivity, "Saved")
 
 
                 }
 
-
-                Toast.makeText(this, "Article Saved", Toast.LENGTH_SHORT).show()
             }
         }
 
@@ -163,6 +165,7 @@ class ArticleDetailActivity : AppCompatActivity() {
     }
 
     private fun shareArticle() {
+        tapVib()
         val intent: Intent
         val imageUri: Uri
         try {
@@ -191,4 +194,11 @@ class ArticleDetailActivity : AppCompatActivity() {
         }
 
     }
+
+    private fun tapVib() {
+        val vib: Vibrator = getSystemService(Context.VIBRATOR_SERVICE) as Vibrator
+        vib.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE))
+    }
+
+
 }

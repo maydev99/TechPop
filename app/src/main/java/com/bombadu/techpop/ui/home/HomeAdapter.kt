@@ -45,8 +45,8 @@ class HomeAdapter : ListAdapter<NewsEntity, HomeAdapter.ItemViewHolder>(DiffCall
                 Picasso.get().load(item.urlToImage)
                     .fit()
                     .centerCrop()
-                    .placeholder(R.drawable.placeholder_image)
-                    .error(R.drawable.missingimage).into(imageView)
+                    .placeholder(R.drawable.gradient_fade_up)
+                    .error(R.drawable.noimage).into(imageView)
 
             } else {
                 Picasso.get().load(R.drawable.missingimage).into(imageView)

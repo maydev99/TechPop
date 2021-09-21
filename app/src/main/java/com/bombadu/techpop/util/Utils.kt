@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable
 import android.net.Uri
 import android.view.Window
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.FileProvider
 import com.bombadu.techpop.R
 import java.io.File
@@ -77,6 +78,10 @@ object Utils  {
         buildDateTextView.text = "Build Date: $buildDate"
         dialog.show()
 
+    }
+
+    fun makeAToast(context: Context, message: String) {
+        Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
     }
 
 
