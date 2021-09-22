@@ -7,10 +7,9 @@ import androidx.appcompat.app.AppCompatActivity
 import com.bombadu.techpop.databinding.ActivityUpdateBinding
 import com.bombadu.techpop.local.NewsEntity
 import com.bombadu.techpop.network.NewsApi
-import com.bombadu.techpop.repository.DefaultMainRepository
+import com.bombadu.techpop.repository.DefaultMainRepository.Companion.TAG
 import com.bombadu.techpop.repository.MainRepository
 import com.bombadu.techpop.ui.MainActivity
-import com.bombadu.techpop.util.Constants.ARTICLE_LIFE_SPAN_IN_DAYS
 import com.bombadu.techpop.util.NetworkUtil
 import com.bombadu.techpop.util.Utils
 import com.google.firebase.database.DataSnapshot
@@ -27,6 +26,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class UpdateActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUpdateBinding
+    private var articleExpiration = 1
     @Inject
     lateinit var repository: MainRepository
     @Inject
@@ -56,6 +56,7 @@ class UpdateActivity : AppCompatActivity() {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val updateInterval = snapshot.child("interval").value.toString().toLong()
                 val updateTimestamp = snapshot.child("last_api_update").value.toString().toLong()
+                articleExpiration = snapshot.child("article_expire_days").value.toString().toInt()
                 val sources = snapshot.child("sources").value.toString()
                 val nextUpdateTime = updateTimestamp + updateInterval
                 val currentTime = Utils.getTimeStamp().toLong()
@@ -63,7 +64,6 @@ class UpdateActivity : AppCompatActivity() {
                 if (currentTime > nextUpdateTime) {
                     ioScope.launch {
                         getCurrentFirebaseData(sources)
-
                     }
                 } else {
                     getNewsFromFirebase()
@@ -71,7 +71,7 @@ class UpdateActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e(DefaultMainRepository.TAG, "Database Error: $error")
+                Log.e(TAG, "Database Error: $error")
             }
 
         }
@@ -98,7 +98,7 @@ class UpdateActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e(DefaultMainRepository.TAG, "GetCurrentFirebaseData: $error")
+                Log.e(TAG, "GetCurrentFirebaseData: $error")
             }
         }
 
@@ -165,12 +165,12 @@ class UpdateActivity : AppCompatActivity() {
     }
 
     private fun deleteOldFirebaseData() {
-        Log.i(DefaultMainRepository.TAG, "Deleting Old Firebase Data")
+        Log.i(TAG, "Deleting Old Firebase Data")
         val deleteArticlesListener = object : ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
 
                 val currentTs = Utils.getTimeStamp().toLong()
-                val deleteTs = currentTs - Utils.convertDaysToTimestampTime(ARTICLE_LIFE_SPAN_IN_DAYS)
+                val deleteTs = currentTs - Utils.convertDaysToTimestampTime(articleExpiration)
                 val deleteList = mutableListOf<String>()
 
                 for (item in snapshot.children) {
@@ -186,6 +186,8 @@ class UpdateActivity : AppCompatActivity() {
                     articlesRef.child(deleteList[i]).removeValue()
                 }
 
+                Log.i(TAG, "Deleting Firebase Data more than $articleExpiration day(s) old")
+
                 getNewsFromFirebase()
 
 
@@ -193,22 +195,17 @@ class UpdateActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e(DefaultMainRepository.TAG, "Firebase Delete Failed")
+                Log.e(TAG, "Firebase Delete Failed")
             }
-
-
         }
 
         articlesRef.addListenerForSingleValueEvent(deleteArticlesListener)
-
 
     }
 
     private fun getNewsFromFirebase() {
 
-        Log.i(
-            DefaultMainRepository.TAG,
-            "GETTING NEWS FROM FIREBASE ${Utils.convertTimestampToDate(Utils.getTimeStamp())}"
+        Log.i(TAG, "GETTING NEWS FROM FIREBASE ${Utils.convertTimestampToDate(Utils.getTimeStamp())}"
         )
         var myCount = 0
 
@@ -219,7 +216,8 @@ class UpdateActivity : AppCompatActivity() {
                 for (item in snapshot.children) {
                     val key = item.key.toString()
                     val author = snapshot.child(key).child("author").value.toString()
-                    val content = snapshot.child(key).child("content").value.toString()
+                    val content = snapshot.child(key).child("conte" +
+                            "nt").value.toString()
                     val description = snapshot.child(key).child("description").value.toString()
                     val publishedAt = snapshot.child(key).child("published_at").value.toString()
                     val source = snapshot.child(key).child("source").value.toString()
@@ -243,7 +241,7 @@ class UpdateActivity : AppCompatActivity() {
                     myCount++
                 }
 
-                Log.i(DefaultMainRepository.TAG, "FB COUNT: $myCount")
+                Log.i(TAG, "FB COUNT: $myCount")
                 myCount = 0
                 ioScope.launch {
                     deleteOldLocalData()
@@ -252,7 +250,7 @@ class UpdateActivity : AppCompatActivity() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                Log.e(DefaultMainRepository.TAG, "Database Error: $error")
+                Log.e(TAG, "Database Error: $error")
             }
         }
 
@@ -261,14 +259,15 @@ class UpdateActivity : AppCompatActivity() {
     }
 
     private fun deleteOldLocalData() {
-        Log.i(DefaultMainRepository.TAG, "Deleting Old Local Data")
-        val deleteTime = Utils.getTimeStamp().toLong() - Utils.convertDaysToTimestampTime(ARTICLE_LIFE_SPAN_IN_DAYS)
+        Log.i(TAG, "Deleting Local Data more than $articleExpiration day(s) old")
+        val deleteTime = Utils.getTimeStamp().toLong() - Utils.convertDaysToTimestampTime(articleExpiration)
         ioScope.launch {
             repository.deleteOldArticlesFromLocalDB(deleteTime)
 
         }
 
         startActivity(Intent(this@UpdateActivity, MainActivity::class.java))
+        finish()
 
     }
 

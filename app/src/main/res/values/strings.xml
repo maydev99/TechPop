@@ -44,6 +44,7 @@
     <string name="scroll_to_bottom">Scroll To Bottom</string>
     <string name="sign_in_with_google">Sign In with Google</string>
     <string name="google_account_image">Google Account Image</string>
+    <string name="that_s_it_for_now">That\'s it for now :)</string>
 
 
 </resources>

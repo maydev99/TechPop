@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 class DefaultMainRepository @Inject constructor(
     val newsApi: NewsApi,
-    val localDao: LocalDao,
+    private val localDao: LocalDao,
     val savedDao: SavedDao
 ) : MainRepository {
 
