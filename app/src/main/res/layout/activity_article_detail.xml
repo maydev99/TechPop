@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.detail.ArticleDetailActivity"
-    app:layoutDescription="@xml/activity_article_detail_scene">
+    app:layoutDescription="@xml/activity_article_detail_scene"
+    tools:context=".ui.detail.ArticleDetailActivity">
 
     <ImageView
         android:id="@+id/detail_image_view"
@@ -67,6 +67,8 @@
             android:textSize="18sp"
             tools:text="Description" />
 
+
+
     </androidx.core.widget.NestedScrollView>
 
     <TextView
@@ -96,18 +98,20 @@
         app:layout_constraintTop_toBottomOf="@+id/detail_title_text_view"
         tools:text="Source" />
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/detail_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        android:backgroundTint="@color/black_med"
-        android:contentDescription="@string/view_full_article_in_web_browser"
-        android:src="@drawable/ic_baseline_public_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
 
-        app:tint="@color/off_white" />
+
+    <TextView
+        android:id="@+id/tap_here_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/nestedScrollView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/tap_here_for_full_article" />
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

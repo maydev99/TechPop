@@ -1,6 +1,8 @@
 package com.bombadu.techpop.ui.home
 
+import android.content.Intent
 import android.content.res.Configuration
+import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -79,6 +81,14 @@ class HomeFragment : Fragment() {
 
             R.id.scroll_to_bottom -> {
                 recyclerView.smoothScrollToPosition(lastPosition)
+            }
+
+            R.id.contact_bombadu -> {
+                Utils.sendToWebPage(requireContext(), "https://www.bombadu.com/contact.html")
+            }
+
+            R.id.news_sources -> {
+                Utils.sendToWebPage(requireContext(), "https://www.bombadu.com/techpopsources.html")
             }
 
         }

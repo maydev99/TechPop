@@ -45,6 +45,9 @@
     <string name="sign_in_with_google">Sign In with Google</string>
     <string name="google_account_image">Google Account Image</string>
     <string name="that_s_it_for_now">That\'s it for now :)</string>
+    <string name="contact_us">Contact Us</string>
+    <string name="news_source_info">News Source Info</string>
+    <string name="tap_here_for_full_article">tap here for full article</string>
 
 
 </resources>

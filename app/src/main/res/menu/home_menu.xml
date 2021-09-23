@@ -30,5 +30,18 @@
 
     </item>
 
+    <item
+        android:id="@+id/contact_bombadu"
+        android:title="@string/contact_us"
+        android:orderInCategory="50"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/news_sources"
+        android:title="@string/news_source_info"
+        android:orderInCategory="35"
+        app:showAsAction="never">
+
+    </item>
 
 </menu>

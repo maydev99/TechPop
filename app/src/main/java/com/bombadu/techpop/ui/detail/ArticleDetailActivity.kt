@@ -95,11 +95,16 @@ class ArticleDetailActivity : AppCompatActivity() {
             }
         }
 
-        binding.detailFab.setOnClickListener {
+      /*  binding.detailFab.setOnClickListener {
             tapVib()
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)
             startActivity(intent)
+        }*/
+
+        binding.tapHereTextView!!.setOnClickListener {
+            tapVib()
+            Utils.sendToWebPage(this, url)
         }
     }
 

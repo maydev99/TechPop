@@ -60,9 +60,9 @@
     <androidx.core.widget.NestedScrollView
         android:id="@+id/nestedScrollView"
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/detail_date_text_view">
@@ -80,17 +80,7 @@
 
     </androidx.core.widget.NestedScrollView>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/detail_fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="32dp"
-        android:backgroundTint="@color/black_med"
-        android:contentDescription="@string/view_full_article_in_web_browser"
-        android:src="@drawable/ic_baseline_public_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:tint="@color/off_white" />
+
 
     <TextView
         android:id="@+id/detail_date_text_view"
@@ -101,6 +91,19 @@
         app:layout_constraintStart_toStartOf="@+id/guideline3"
         app:layout_constraintTop_toBottomOf="@+id/detail_author_text_view"
         tools:text="1-1-2021" />
+
+    <TextView
+        android:id="@+id/tap_here_text_view"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textColor="@color/purple_500"
+        android:textSize="16sp"
+        android:gravity="center_horizontal"
+        app:layout_constraintTop_toBottomOf="@id/nestedScrollView"
+        app:layout_constraintStart_toEndOf="@id/detail_image_view"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/tap_here_for_full_article" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"

@@ -3,6 +3,7 @@ package com.bombadu.techpop.util
 import android.annotation.SuppressLint
 import android.app.Dialog
 import android.content.Context
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -10,6 +11,7 @@ import android.net.Uri
 import android.view.Window
 import android.widget.TextView
 import android.widget.Toast
+import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.FileProvider
 import com.bombadu.techpop.R
 import java.io.File
@@ -82,6 +84,12 @@ object Utils  {
 
     fun makeAToast(context: Context, message: String) {
         Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+    }
+
+    fun sendToWebPage(context: Context, webUrl: String) {
+        val intent = Intent(Intent.ACTION_VIEW)
+        intent.data = Uri.parse(webUrl)
+        context.startActivity(intent)
     }
 
 
