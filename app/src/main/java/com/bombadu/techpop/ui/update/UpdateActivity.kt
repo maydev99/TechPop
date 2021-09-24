@@ -265,9 +265,9 @@ class UpdateActivity : AppCompatActivity() {
             repository.deleteOldArticlesFromLocalDB(deleteTime)
 
         }
-
-        startActivity(Intent(this@UpdateActivity, MainActivity::class.java))
         finish()
+        startActivity(Intent(this@UpdateActivity, MainActivity::class.java))
+
 
     }
 

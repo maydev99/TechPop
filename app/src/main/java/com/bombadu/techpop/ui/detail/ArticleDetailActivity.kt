@@ -8,7 +8,6 @@ import android.os.VibrationEffect
 import android.os.Vibrator
 import android.view.Menu
 import android.view.MenuItem
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
@@ -95,14 +94,9 @@ class ArticleDetailActivity : AppCompatActivity() {
             }
         }
 
-      /*  binding.detailFab.setOnClickListener {
-            tapVib()
-            val intent = Intent(Intent.ACTION_VIEW)
-            intent.data = Uri.parse(url)
-            startActivity(intent)
-        }*/
 
-        binding.tapHereTextView!!.setOnClickListener {
+
+        binding.tapHereTextView.setOnClickListener {
             tapVib()
             Utils.sendToWebPage(this, url)
         }

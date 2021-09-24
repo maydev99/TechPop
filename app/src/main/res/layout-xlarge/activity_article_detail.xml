@@ -80,8 +80,6 @@
     </androidx.core.widget.NestedScrollView>
 
 
-
-
     <TextView
         android:id="@+id/detail_date_text_view"
         android:layout_width="0dp"
@@ -94,12 +92,19 @@
 
     <TextView
         android:id="@+id/tap_here_text_view"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
+        android:background="@drawable/round_button_corners"
+        android:backgroundTint="@color/black"
+        android:elevation="10dp"
         android:gravity="center_horizontal"
-        android:text="@string/tap_here_for_full_article"
-        android:textColor="@color/purple_500"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/read_full_article_on_the_web"
+        android:textColor="@color/white"
         android:textSize="22sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/detail_image_view"

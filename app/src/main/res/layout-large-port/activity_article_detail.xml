@@ -10,13 +10,13 @@
         android:id="@+id/detail_image_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:contentDescription="@string/image_for_article"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="@+id/guideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/placeholder_image"
-        android:contentDescription="@string/image_for_article" />
+        app:srcCompat="@drawable/placeholder_image" />
 
     <TextView
         android:id="@+id/detail_title_text_view"
@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="16dp"
-        android:textSize="28sp"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -38,7 +38,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:textSize="23sp"
+        android:textSize="22sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -54,7 +54,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:textColor="@color/design_default_color_primary"
-        android:textSize="23sp"
+        android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -79,7 +79,7 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:textColor="@color/black"
-            android:textSize="23sp"
+            android:textSize="22sp"
             tools:text="Description" />
 
     </androidx.core.widget.NestedScrollView>
@@ -87,16 +87,23 @@
 
     <TextView
         android:id="@+id/tap_here_text_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:textColor="@color/purple_500"
-        android:textSize="16sp"
+        android:background="@drawable/round_button_corners"
+        android:backgroundTint="@color/black"
+        android:elevation="10dp"
         android:gravity="center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/nestedScrollView"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:text="@string/read_full_article_on_the_web"
+        android:textColor="@color/white"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/tap_here_for_full_article" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nestedScrollView" />
 
     <TextView
         android:id="@+id/detail_date_text_view"
@@ -105,7 +112,7 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
-        android:textSize="22sp"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/detail_author_text_view"

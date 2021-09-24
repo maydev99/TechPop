@@ -68,7 +68,6 @@
             tools:text="Description" />
 
 
-
     </androidx.core.widget.NestedScrollView>
 
     <TextView
@@ -99,19 +98,25 @@
         tools:text="Source" />
 
 
-
     <TextView
         android:id="@+id/tap_here_text_view"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="24dp"
-        android:textColor="@color/purple_500"
-        android:textSize="16sp"
+        android:background="@drawable/round_button_corners"
+        android:backgroundTint="@color/black"
+        android:elevation="10dp"
         android:gravity="center_horizontal"
-        app:layout_constraintTop_toBottomOf="@id/nestedScrollView"
-        app:layout_constraintStart_toStartOf="parent"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:textColor="@color/white"
+        android:textSize="16sp"
+        android:text="@string/read_full_article_on_the_web"
         app:layout_constraintEnd_toEndOf="parent"
-        android:text="@string/tap_here_for_full_article" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nestedScrollView" />
 
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

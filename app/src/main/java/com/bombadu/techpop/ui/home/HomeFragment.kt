@@ -72,7 +72,7 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.about -> {
-                Utils.showAboutDialog(requireContext(),"v2.0","9.22.2021")
+                Utils.showAboutDialog(requireContext(),"v2.0","9.24.2021")
             }
 
             R.id.scroll_to_top -> {
