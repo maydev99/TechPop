@@ -1,8 +1,6 @@
 package com.bombadu.techpop.ui.home
 
-import android.content.Intent
 import android.content.res.Configuration
-import android.net.Uri
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
@@ -54,12 +52,12 @@ class HomeFragment : Fragment() {
     }
 
     private fun observeNewsArticles() {
-        viewModel.newsArticles.observe(viewLifecycleOwner, { news ->
+        viewModel.newsArticles.observe(viewLifecycleOwner) { news ->
             lastPosition = news.size - 1
             homeAdapter.submitList(news)
             recyclerView.scrollToPosition(0)
 
-        })
+        }
 
 
     }
@@ -72,7 +70,7 @@ class HomeFragment : Fragment() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when(item.itemId) {
             R.id.about -> {
-                Utils.showAboutDialog(requireContext(),"v2.0","9.24.2021")
+                Utils.showAboutDialog(requireContext(),"v2.1","2.5.2022")
             }
 
             R.id.scroll_to_top -> {
@@ -84,11 +82,11 @@ class HomeFragment : Fragment() {
             }
 
             R.id.contact_bombadu -> {
-                Utils.sendToWebPage(requireContext(), "https://www.bombadu.com/contact.html")
+                Utils.sendToWebPage(requireContext(), "https://www.ilocode.com/contact.html")
             }
 
             R.id.news_sources -> {
-                Utils.sendToWebPage(requireContext(), "https://www.bombadu.com/techpopsources.html")
+                Utils.sendToWebPage(requireContext(), "https://www.ilocode.com/techpopsources.html")
             }
 
         }

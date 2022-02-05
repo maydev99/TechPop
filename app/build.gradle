@@ -14,8 +14,8 @@ android {
         applicationId "com.bombadu.techpop"
         minSdk 26
         targetSdk 30
-        versionCode 6
-        versionName "2.0"
+        versionCode 8
+        versionName "2.1.1"
         buildConfigField("String", "API_KEY", API_KEY)
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
